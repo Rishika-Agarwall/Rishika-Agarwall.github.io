@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Load posts from localStorage or load defaults
   let posts = JSON.parse(localStorage.getItem('research_posts'));
-  const currentVersion = '2'; // Force reset cache for new defaults
+  const currentVersion = '3'; // Force reset cache for new layout
   const savedVersion = localStorage.getItem('posts_version');
   
   if (!posts || posts.length === 0 || savedVersion !== currentVersion) {
@@ -107,6 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const titleInput = document.getElementById('post-title');
     const categoryInput = document.getElementById('post-category');
     const contentInput = document.getElementById('post-content');
+    const passcodeInput = document.getElementById('post-passcode');
+    
+    // Admin verification passcode
+    if (passcodeInput.value !== 'rishika2026') {
+      alert('Unauthorized: Invalid admin passcode. Only the portfolio owner can post observations.');
+      return;
+    }
     
     const newPost = {
       id: Date.now(),
@@ -135,9 +142,30 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     
+    const allComments = JSON.parse(localStorage.getItem('post_comments')) || {};
+    
     posts.forEach(post => {
       const escapedBody = escapeHTML(post.content);
       const linkifiedBody = escapedBody.replace(/(https?:\/\/[^\s\)]+)/g, '<a href="$1" target="_blank" class="blog-link">$1</a>');
+      const comments = allComments[post.id] || [];
+      const commentCount = comments.length;
+      
+      let commentsHtml = '';
+      if (comments.length === 0) {
+        commentsHtml = `<p class="no-comments-msg" id="no-comments-msg-${post.id}">No comments yet. Be the first to comment!</p>`;
+      } else {
+        comments.forEach(c => {
+          commentsHtml += `
+            <div class="comment-item">
+              <div class="comment-meta">
+                <span class="comment-author">${escapeHTML(c.author)}</span>
+                <span class="comment-date">${escapeHTML(c.date)}</span>
+              </div>
+              <p class="comment-text-body">${escapeHTML(c.text)}</p>
+            </div>
+          `;
+        });
+      }
       
       const card = document.createElement('article');
       card.className = 'blog-post-card';
@@ -147,27 +175,118 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="blog-post-category">${escapeHTML(post.category)}</span>
             <span class="blog-post-date">${escapeHTML(post.date)}</span>
           </div>
+          <button class="delete-post-btn" data-id="${post.id}" aria-label="Delete observation">
+            <i class="fa-solid fa-trash-can"></i> Delete
+          </button>
         </div>
         <h3 class="blog-post-title">${escapeHTML(post.title)}</h3>
         <p class="blog-post-body">${linkifiedBody}</p>
-        <button class="delete-post-btn" data-id="${post.id}" aria-label="Delete observation">
-          <i class="fa-solid fa-trash-can"></i> Delete
-        </button>
+        
+        <div class="comments-section">
+          <button class="toggle-comments-btn" data-id="${post.id}">
+            <i class="fa-regular fa-comments"></i> Comments (<span class="comment-count-${post.id}">${commentCount}</span>)
+            <i class="fa-solid fa-chevron-down comment-chevron"></i>
+          </button>
+          <div class="comments-container collapsed" id="comments-container-${post.id}">
+            <div class="comments-list" id="comments-list-${post.id}">
+              ${commentsHtml}
+            </div>
+            <form class="add-comment-form" data-post-id="${post.id}">
+              <div class="comment-form-row">
+                <input type="text" class="comment-author-input" id="comment-author-${post.id}" placeholder="Your Name" required>
+                <button type="submit" class="comment-submit-btn">Post Comment</button>
+              </div>
+              <textarea class="comment-text-input" id="comment-text-${post.id}" rows="2" placeholder="Add a comment..." required></textarea>
+            </form>
+          </div>
+        </div>
       `;
       blogPostsFeed.appendChild(card);
     });
     
-    // Attach delete listeners
+    // Bind delete listeners
     const deleteButtons = blogPostsFeed.querySelectorAll('.delete-post-btn');
     deleteButtons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         const id = parseInt(btn.getAttribute('data-id'));
         deletePost(id);
       });
     });
+    
+    // Bind toggle comments listeners
+    const toggleCommentsBtns = blogPostsFeed.querySelectorAll('.toggle-comments-btn');
+    toggleCommentsBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const postId = btn.getAttribute('data-id');
+        const container = document.getElementById(`comments-container-${postId}`);
+        container.classList.toggle('collapsed');
+        btn.querySelector('.comment-chevron').classList.toggle('rotated');
+      });
+    });
+    
+    // Bind add comment form submission listeners
+    const commentForms = blogPostsFeed.querySelectorAll('.add-comment-form');
+    commentForms.forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const postId = form.getAttribute('data-post-id');
+        const authorInput = document.getElementById(`comment-author-${postId}`);
+        const textInput = document.getElementById(`comment-text-${postId}`);
+        
+        const newComment = {
+          id: Date.now(),
+          author: authorInput.value,
+          text: textInput.value,
+          date: formatDate(new Date())
+        };
+        
+        let allComments = JSON.parse(localStorage.getItem('post_comments')) || {};
+        if (!allComments[postId]) {
+          allComments[postId] = [];
+        }
+        allComments[postId].push(newComment);
+        localStorage.setItem('post_comments', JSON.stringify(allComments));
+        
+        renderCommentsForPost(postId);
+        form.reset();
+      });
+    });
+  }
+  
+  function renderCommentsForPost(postId) {
+    const allComments = JSON.parse(localStorage.getItem('post_comments')) || {};
+    const comments = allComments[postId] || [];
+    const listContainer = document.getElementById(`comments-list-${postId}`);
+    const countSpan = document.querySelector(`.comment-count-${postId}`);
+    
+    countSpan.textContent = comments.length;
+    
+    if (comments.length === 0) {
+      listContainer.innerHTML = `<p class="no-comments-msg" id="no-comments-msg-${postId}">No comments yet. Be the first to comment!</p>`;
+      return;
+    }
+    
+    let commentsHtml = '';
+    comments.forEach(c => {
+      commentsHtml += `
+        <div class="comment-item">
+          <div class="comment-meta">
+            <span class="comment-author">${escapeHTML(c.author)}</span>
+            <span class="comment-date">${escapeHTML(c.date)}</span>
+          </div>
+          <p class="comment-text-body">${escapeHTML(c.text)}</p>
+        </div>
+      `;
+    });
+    listContainer.innerHTML = commentsHtml;
   }
   
   function deletePost(id) {
+    const code = prompt("Enter admin passcode to delete this observation:");
+    if (code !== 'rishika2026') {
+      alert("Unauthorized: Invalid passcode.");
+      return;
+    }
     posts = posts.filter(post => post.id !== id);
     localStorage.setItem('research_posts', JSON.stringify(posts));
     renderPosts();
