@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rishika Agarwal | Portfolio</title>
+  <meta name="description" content="Professional portfolio and research log of Rishika Agarwal, MSc Computer Science student at the University of Freiburg.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="portfolio-container">
+    
+    <!-- Left Sidebar / Header Block -->
+    <header class="profile-sidebar">
+      <div class="profile-card">
+        <div class="avatar-container">
+          <img src="avatar.svg" alt="Rishika Agarwal Profile" class="profile-avatar" id="profile-img">
+        </div>
+        <h1 class="profile-name">Rishika Agarwal</h1>
+        <p class="profile-title">M.Sc. Student in Computer Science</p>
+        <p class="profile-affiliation">Albert Ludwigs University of Freiburg</p>
+        
+        <div class="theme-toggle-container">
+          <button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark Mode">
+            <i class="fa-solid fa-moon"></i> <span>Dark Mode</span>
+          </button>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="#about" class="nav-link active"><i class="fa-solid fa-user"></i> About</a></li>
+          <li><a href="#experience" class="nav-link"><i class="fa-solid fa-briefcase"></i> Experience</a></li>
+          <li><a href="#projects" class="nav-link"><i class="fa-solid fa-code"></i> Projects</a></li>
+          <li><a href="#publications" class="nav-link"><i class="fa-solid fa-book"></i> Publications</a></li>
+          <li><a href="#blog" class="nav-link"><i class="fa-solid fa-pen-nib"></i> Research Log</a></li>
+        </ul>
+      </nav>
+      
+      <div class="profile-contact-info">
+        <div class="contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <a href="mailto:ra145@email.uni-freiburg.de">ra145@email.uni-freiburg.de</a>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>+49-15510228856</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Freiburg, Germany</span>
+        </div>
+      </div>
+      
+      <div class="social-links">
+        <a href="https://github.com/Rishika-Agarwall" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://linkedin.com/in/rishika-alok-agarwal" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="cv.pdf" target="_blank" class="cv-btn" aria-label="Download CV"><i class="fa-solid fa-file-pdf"></i> View CV</a>
+      </div>
+    </header>
+    
+    <!-- Right Main Content -->
+    <main class="main-content">
+      
+      <!-- About & Education Section -->
+      <section id="about" class="content-section">
+        <h2 class="section-title">About Me</h2>
+        <div class="card">
+          <p>
+            I am a Master of Science in Computer Science student at the University of Freiburg. My academic and research focus centers on Machine Learning, Deep Learning, Natural Language Processing, and LLM safety auditing.
+          </p>
+          <p>
+            Currently, I am working on LLM safety guardrails and refusal boundary configurations at the University Medical Center Freiburg. I also bring two years of professional software development experience from my time at Accenture, building robust enterprise application backends.
+          </p>
+        </div>
+        
+        <h3 class="subsection-title">Education</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Oct 2025 - Present</span>
+              <h4 class="timeline-title">Master of Science in Computer Science</h4>
+              <p class="timeline-subtitle">Albert Ludwigs University of Freiburg, Germany</p>
+              <p class="timeline-details">Coursework: Machine Learning, Deep Learning, Digital Health, Advanced Algorithms, Systems Programming.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Aug 2019 - Jun 2023</span>
+              <h4 class="timeline-title">Bachelor of Engineering in Computer Engineering</h4>
+              <p class="timeline-subtitle">Fr. Conceicao Rodrigues Institute of Technology, Mumbai University, India</p>
+              <p class="timeline-details">Coursework: Data Structures, OOP, Database Management Systems, Computer Networks.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Experience Section -->
+      <section id="experience" class="content-section">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Aug 2023 - Sep 2025</span>
+              <h4 class="timeline-title">Associate Software Engineer</h4>
+              <p class="timeline-subtitle">Accenture Solutions Pvt. Ltd, Mumbai, India</p>
+              <ul class="experience-bullets">
+                <li>Developed and maintained data processing pipelines using Python and Informatica, handling large-scale datasets reliably.</li>
+                <li>Provided technical ownership for application monitoring and system stability for a major insurance client.</li>
+                <li>Collaborated within agile, cross-functional teams to resolve issue tickets and maintain robust software backends using Java and Spring Boot.</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Apr 2021 - Jul 2021</span>
+              <h4 class="timeline-title">Software Developer Intern</h4>
+              <p class="timeline-subtitle">SofScript Systems and Solutions Pvt. Ltd, India</p>
+              <ul class="experience-bullets">
+                <li>Developed and deployed a client-facing service request portal to manage diverse healthcare inquiries.</li>
+                <li>Built the full-stack web application on Django/Python, integrating frontend elements (HTML, CSS) for a functional interface.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Projects Section -->
+      <section id="projects" class="content-section">
+        <h2 class="section-title">Key Projects</h2>
+        <div class="projects-grid">
+          
+          <div class="project-card">
+            <div class="project-header">
+              <i class="fa-solid fa-robot project-icon"></i>
+              <h3 class="project-title">Educational GPT Prototype</h3>
+            </div>
+            <p class="project-desc">
+              Collaborating on an educational psycho-oncological support assistant prototype ("Krebs neu denken") at the University Medical Center Freiburg. Auditing Custom GPT behaviors, analyzing hallucinations, and establishing prompt safety guardrails.
+            </p>
+            <div class="project-tech">
+              <span>Python</span>
+              <span>LLMs</span>
+              <span>Prompt Engineering</span>
+            </div>
+          </div>
+          
+          <div class="project-card">
+            <div class="project-header">
+              <i class="fa-solid fa-language project-icon"></i>
+              <h3 class="project-title">Conversational Translator</h3>
+            </div>
+            <p class="project-desc">
+              Developed a real-time conversational voice and text translator between English and German, utilizing Android Studio, speech detection libraries, and API-based translation.
+            </p>
+            <div class="project-tech">
+              <span>Flutter</span>
+              <span>React</span>
+              <span>Android Studio</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/Rishika-Agarwall/R-voice_translator" target="_blank"><i class="fa-brands fa-github"></i> Repository</a>
+            </div>
+          </div>
+          
+          <div class="project-card">
+            <div class="project-header">
+              <i class="fa-solid fa-images project-icon"></i>
+              <h3 class="project-title">Product Matching System</h3>
+            </div>
+            <p class="project-desc">
+              Engineered a robust inventory matching system that utilizes web scraping and image processing logic to identify and link identical products across retail catalogs.
+            </p>
+            <div class="project-tech">
+              <span>Python</span>
+              <span>WebScraping</span>
+              <span>SQL</span>
+            </div>
+          </div>
+          
+          <div class="project-card">
+            <div class="project-header">
+              <i class="fa-solid fa-eye-low-vision project-icon"></i>
+              <h3 class="project-title">Eye(I) Still Know - Assistive App</h3>
+            </div>
+            <p class="project-desc">
+              Created an AI-powered app for the visually impaired, integrating TensorFlow facial recognition, speech synthesis, and obstacle detection. Co-authored paper published in IJEMR.
+            </p>
+            <div class="project-tech">
+              <span>Python</span>
+              <span>TensorFlow</span>
+              <span>Django</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/Rishika-Agarwall/Eye-I-_Still_Know" target="_blank"><i class="fa-brands fa-github"></i> Repository</a>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- Publications Section -->
+      <section id="publications" class="content-section">
+        <h2 class="section-title">Publications</h2>
+        <div class="card publication-card">
+          <div class="publication-icon">
+            <i class="fa-solid fa-file-invoice"></i>
+          </div>
+          <div class="publication-details">
+            <h3 class="publication-title">Eye(I) Still Know - An App for the Blind</h3>
+            <p class="publication-authors">Rishika Agarwal, et al.</p>
+            <p class="publication-meta">Published in <strong>International Journal of Engineering and Management Research (IJEMR)</strong>, Jan 2021</p>
+            <p class="publication-desc">Co-authored research on an AI assistive mobile tool utilizing computer vision and audio feedback systems to support navigation for visually impaired users.</p>
+            <a href="https://drive.google.com/file/d/1Px6tiUzst4vYTxbQSw0ftBJ30951a8ux/view" target="_blank" class="publication-link"><i class="fa-solid fa-external-link"></i> View Publication Certificate</a>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Blog / Research Log Section -->
+      <section id="blog" class="content-section">
+        <h2 class="section-title">Research Log & Blog</h2>
+        <p class="section-intro">Observations, literature reviews, and research summaries from my studies and projects.</p>
+        
+        <!-- Add Blog Post Form (Formal & Collapsible) -->
+        <div class="blog-form-card">
+          <div class="blog-form-header" id="blog-form-toggle">
+            <h3><i class="fa-solid fa-plus-circle"></i> Log a New Research Observation</h3>
+            <i class="fa-solid fa-chevron-down toggle-icon"></i>
+          </div>
+          <form id="add-post-form" class="blog-form collapsed">
+            <div class="form-group">
+              <label for="post-title">Topic Title</label>
+              <input type="text" id="post-title" required placeholder="e.g. LLM Refusal Boundary Robustness">
+            </div>
+            <div class="form-group">
+              <label for="post-category">Category</label>
+              <select id="post-category" required>
+                <option value="Research Observation">Research Observation</option>
+                <option value="Literature Review">Literature Review</option>
+                <option value="Project Update">Project Update</option>
+                <option value="General Tech">General Tech</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="post-content">Observation & Analysis</label>
+              <textarea id="post-content" rows="4" required placeholder="Write your research analysis or literature notes here..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane"></i> Post Observation</button>
+          </form>
+        </div>
+        
+        <!-- Blog Posts Container -->
+        <div class="blog-feed" id="blog-posts-feed">
+          <!-- Dynamically populated by script.js -->
+        </div>
+      </section>
+      
+      <footer class="main-footer">
+        <p>&copy; 2026 Rishika Agarwal. All rights reserved.</p>
+      </footer>
+      
+    </main>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
