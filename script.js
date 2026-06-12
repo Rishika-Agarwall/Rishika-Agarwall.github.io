@@ -32,6 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // === Admin Mode Check ===
+  const urlParams = new URLSearchParams(window.location.search);
+  const isAdmin = urlParams.get('admin') === 'true';
+  const adminForm = document.getElementById('admin-only-form');
+  
+  if (isAdmin && adminForm) {
+    adminForm.style.display = 'block';
+  }
+
   // === Scroll Active Nav Highlight ===
   const sections = document.querySelectorAll('.content-section');
   const navLinks = document.querySelectorAll('.nav-link');
@@ -89,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Load posts from localStorage or load defaults
   let posts = JSON.parse(localStorage.getItem('research_posts'));
-  const currentVersion = '3'; // Force reset cache for new layout
+  const currentVersion = '4'; // Force reset cache for new admin layout
   const savedVersion = localStorage.getItem('posts_version');
   
   if (!posts || posts.length === 0 || savedVersion !== currentVersion) {
@@ -167,6 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
       
+      const deleteButtonHtml = isAdmin ? `
+        <button class="delete-post-btn" data-id="${post.id}" aria-label="Delete observation">
+          <i class="fa-solid fa-trash-can"></i> Delete
+        </button>
+      ` : '';
+      
       const card = document.createElement('article');
       card.className = 'blog-post-card';
       card.innerHTML = `
@@ -175,9 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="blog-post-category">${escapeHTML(post.category)}</span>
             <span class="blog-post-date">${escapeHTML(post.date)}</span>
           </div>
-          <button class="delete-post-btn" data-id="${post.id}" aria-label="Delete observation">
-            <i class="fa-solid fa-trash-can"></i> Delete
-          </button>
+          ${deleteButtonHtml}
         </div>
         <h3 class="blog-post-title">${escapeHTML(post.title)}</h3>
         <p class="blog-post-body">${linkifiedBody}</p>
@@ -204,14 +217,16 @@ document.addEventListener('DOMContentLoaded', () => {
       blogPostsFeed.appendChild(card);
     });
     
-    // Bind delete listeners
-    const deleteButtons = blogPostsFeed.querySelectorAll('.delete-post-btn');
-    deleteButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = parseInt(btn.getAttribute('data-id'));
-        deletePost(id);
+    if (isAdmin) {
+      // Bind delete listeners
+      const deleteButtons = blogPostsFeed.querySelectorAll('.delete-post-btn');
+      deleteButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = parseInt(btn.getAttribute('data-id'));
+          deletePost(id);
+        });
       });
-    });
+    }
     
     // Bind toggle comments listeners
     const toggleCommentsBtns = blogPostsFeed.querySelectorAll('.toggle-comments-btn');
