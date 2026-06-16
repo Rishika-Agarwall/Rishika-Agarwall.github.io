@@ -89,16 +89,23 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: 2,
-      title: 'Literature Review: Unsupervised Product Alignment in E-Commerce Pipelines',
-      category: 'Literature Review',
+      title: 'LLM Safety and Alignment via NeMo Guardrails',
+      category: 'Research Observation',
       date: 'June 08, 2026',
-      content: 'Researched unsupervised image alignment and text fuzzy matching for e-commerce inventories. Product alignment across catalogs is difficult due to varying image angles, lighting, and metadata. I reviewed feature extraction techniques, comparing ResNet and Vision Transformers (ViTs) as discussed in unsupervised representation learning papers (such as SwAV: https://arxiv.org/abs/2006.09882). In my product matching system project, I built visual similarity pipelines using Python and OpenCV, combining image embeddings with text matching algorithms. I am currently co-authoring a paper focusing on these hybrid retrieval architectures.'
+      content: 'Explored NVIDIA NeMo Guardrails for configuring execution flows and safety boundaries in LLM systems. I studied how colang files can be used to steer models away from prohibited topics (such as diagnostic or medical advice) and direct them towards safety-compliant responses. This programmatic approach to alignment ensures robust execution paths, preventing jailbreaks and prompt injections far more effectively than standard system prompts.'
+    },
+    {
+      id: 3,
+      title: 'Stateful Multi-Agent Workflows with LangGraph',
+      category: 'Research Observation',
+      date: 'June 12, 2026',
+      content: 'Investigated LangGraph for building stateful, multi-agent systems with cyclic graphs. By defining explicit node states and edge transitions, we can orchestrate complex reasoning paths where separate LLM agents collaborate (e.g., one for generation, one for factuality auditing). This setup provides precise control over agent behavior, facilitating error recovery and structured output validation in production environments.'
     }
   ];
   
   // Load posts from localStorage or load defaults
   let posts = JSON.parse(localStorage.getItem('research_posts'));
-  const currentVersion = '4'; // Force reset cache for new admin layout
+  const currentVersion = '5'; // Force reset cache for new admin layout
   const savedVersion = localStorage.getItem('posts_version');
   
   if (!posts || posts.length === 0 || savedVersion !== currentVersion) {

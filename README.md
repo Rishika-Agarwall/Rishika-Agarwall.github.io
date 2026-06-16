@@ -3,7 +3,7 @@
 A formal, modern, and fully responsive single-page portfolio website designed for **Rishika Agarwal**, MSc Computer Science student at the University of Freiburg.
 
 ## 🔗 Live Site
-* **Live Deployment:** [rishika-agarwal.surge.sh](http://rishika-agarwal.surge.sh/)
+* **Live Deployment:** [rishika-agarwall.github.io](https://rishika-agarwall.github.io/)
 
 ## 🛠️ Built With
 * **Structure:** Semantic HTML5
